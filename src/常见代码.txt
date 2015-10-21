@@ -1,0 +1,15 @@
+1 ªÒ»° token
+AccessToken token=new AccessToken();
+		token=TokenUtil.getAccessToken();
+		String toke=token.getToken(); 
+		
+2 post https 
+		
+		JSONObject jsonObject = TokenUtil.httpRequest(url, "GET", null);
+		
+	    JSONObject jsonObject = TokenUtil.httpRequest(url, "POST", jso.toString());
+	    
+	 3  
+	 conn=ConnectToDatabase.GetConnection();
+	 	JDBCUtils_c3p0.release(conn, per, rs);
+	 JDBCUtils_c3p0.release(conn, ps, null);

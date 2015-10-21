@@ -1,0 +1,331 @@
+
+use lzr;
+
+//创建消息存储表
+DROP TABLE IF EXISTS message;
+CREATE TABLE message (
+  id int(100) AUTO_INCREMENT,
+  msgid bigint(210) default NULL,
+  time bigint(210) default NULL,
+  duserid varchar(60) default NULL,
+  userid varchar(60) default NULL,
+  mtype varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+insert into message (msgid,time,duserid,userid,mtype) values (1234567890123456,1348831860,'uujp','ddd','dddd');
+select * from message where msgid = '1234567890123456,1348831860';
+按照时间段查询
+select count(*) from message where time>=? and time<=?
+
+
+
+
+
+/创建用户地理位置信息表  openid 用户微信唯一id  lng经度 lat 纬度  bd_lng  bd_lat 百度转化过得经度维度
+DROP TABLE IF EXISTS user_location;
+CREATE TABLE user_location (
+  id int(100) AUTO_INCREMENT,
+  openid varchar(60) default NULL,
+  lng varchar(60) default NULL,
+  lat varchar(60) default NULL,
+  bd_lng varchar(60) default NULL,
+  bd_lat varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into user_location (openid,lng,lat,bd_lng,bd_lat) values (1234567890123456,1348831860,'uujp','ddd','dddd');
+select * from user_location where openid = '1234567890123456,1348831860';
+CREATE INDEX userlocation ON user_location (openid);
+//创建表存储accesstoken
+DROP TABLE IF EXISTS token;
+CREATE TABLE token (
+  id int(100) AUTO_INCREMENT,
+  token varchar(1000) default NULL,
+  exptime varchar(60) default NULL,
+  gettime varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into token (token,exptime,gettime) values ('1234567890123456','1348831860','2015-11-11');
+select * from token where id=(select max(id) from token);
+
+//创建表存储jsticket
+DROP TABLE IF EXISTS jsticket;
+CREATE TABLE jsticket (
+  id int(100) AUTO_INCREMENT,
+  ticket varchar(1000) default NULL,
+  exptime varchar(60) default NULL,
+  gettime varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/**exptime 指的是tx的返回时间**/
+/**gettime/endtime 指的是最后有效时间 截止时间**/
+
+//创建表存储cardticket
+DROP TABLE IF EXISTS cardticket;
+CREATE TABLE cardticket (
+  id int(100) AUTO_INCREMENT,
+  ticket varchar(1000) default NULL,
+  exptime varchar(60) default NULL,
+  endtime varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into cardticket (ticket,exptime,endtime) values ('sdfsds','drgfdg','fdgdg');
+
+
+//创建表存储优惠卷的 cordtype cardcode  cardpassword cardstatus  已发送的卡卷要改变status 发送的status ==yes 没有的 no
+DROP TABLE IF EXISTS cardnum;
+CREATE TABLE cardnum (
+  id int(100) AUTO_INCREMENT,
+  cordtype varchar(16) default NULL,
+  cardcode varchar(60) default NULL,
+  cardstatus varchar(60) default NULL,
+  cardpassword varchar(60) default NULL,
+  cardid varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+update  cardnum set cardstatus='no' where cardstatus='yes';
+insert into cardnum (cordtype,cardcode,cardstatus,cardpassword) values ('CASH','12345628','no','11111112');
+insert into cardnum (cordtype,cardcode,cardstatus,cardpassword) values ('CASH','12345629','no','22222223');
+insert into cardnum (cordtype,cardcode,cardstatus,cardpassword) values ('CASH','12345620','no','33333334');
+insert into cardnum (cordtype,cardcode,cardstatus,cardpassword) values ('CASH','12345622','no','33333335');
+select * from cardnum where cardstatus='yes';
+update cardnum set cardstatus='no' where cardstatus='yes'; 
+delete * from cardnum where cardcode='pwRFttwnRFe3CdSAG6gfmcpgMkIE';
+
+
+//创建优惠卷的 cardid cardsku cardtype 
+DROP TABLE IF EXISTS cardinfo;
+CREATE TABLE cardinfo (
+  id int(100) AUTO_INCREMENT,
+  cordtype varchar(16) default NULL,
+  cardsku varchar(60) default NULL,
+  cardid varchar(60) default NULL,
+  cardtime varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+在这里 由于cardid id 都是唯一的，因此需要调取折扣卷的时候，就可以用这个标识来确定
+
+
+
+insert into cardinfo (cordtype,cardsku,cardid,cardtime) values ('DISCOUNT','120002123','no','5562335566');
+insert into cardinfo (cordtype,cardsku,cardid,cardtime) values ('CASH','85506069','no','85506068');
+select * from cardinfo where cordtype='yes';
+
+//创建文本消息存储表
+DROP TABLE IF EXISTS textmeg;
+CREATE TABLE textmeg (
+  id int(100) AUTO_INCREMENT,
+  time bigint(210) default NULL,
+  duserid varchar(60) default NULL,
+  userid varchar(60) default NULL,
+  mtype varchar(60) default NULL,
+  content varchar(2000) default NULL,
+  nickname varchar(2000) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+//存储武商网的信息和微信绑定信息
+DROP TABLE IF EXISTS wxwushang;
+CREATE TABLE wxwushang (
+  id int(100) AUTO_INCREMENT,
+  time varchar(210) default NULL,
+  openid varchar(60) default NULL,
+  wsuser varchar(60) default NULL,
+  wspasswd varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+select * from wxwushang where openid=?;
+
+
+//存储用户上传的文件的名称
+DROP TABLE IF EXISTS filename;
+CREATE TABLE filename (
+  id int(100) AUTO_INCREMENT,
+  filename varchar(16) default NULL,
+  time varchar(60) default NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into filename (filename,time) values ('DISCOUNT','120002123');
+
+select * from filename ;
+
+
+
+//聊天知识库
+DROP TABLE IF EXISTS knowledge;
+create table knowledge(
+  id int not null AUTO_INCREMENT primary key comment '主键标识',
+  question varchar(2000) not null comment '问题',
+  answer text(8000) not null comment '答案',
+  category int not null comment '知识库类别(1 普通对话 2笑话 3 上下文)'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '问答知识表';
+
+
+
+DROP TABLE IF EXISTS knowledge_sub;
+create table knowledge_sub(
+  id int not null AUTO_INCREMENT primary key comment '主键标识',
+  pid int not null comment '与koowledge表id对应',
+  answer text(8000) not null comment '答案'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '问答知识子表';
+
+DROP TABLE IF EXISTS joke;
+create table joke(
+  joke_id int not null AUTO_INCREMENT primary key comment '主键标识',
+  joke_content text(8000)  comment '笑话内容'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '笑话表';
+
+
+DROP TABLE IF EXISTS chat_log;
+create table chat_log(
+  id int not null AUTO_INCREMENT primary key comment '主键标识',
+  open_id varchar(30) not null comment '用户的openid',
+  create_time varchar(20) not null comment '消息创建时间',
+  req_msg varchar(2000) not null comment '用户上一行消息',
+  resp_msg varchar(2000) not null comment '回复的消息',
+  chat_category int  comment '聊天类别(0 未知 1 普通对话 2笑话 3 上下文)'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '聊天记录表';
+
+
+//创建图文消息表
+DROP TABLE IF EXISTS article;
+create table article(
+  id int not null AUTO_INCREMENT primary key comment '主键标识',
+  picurl varchar(200) not null comment '图片链接',
+  url varchar(200) not null comment '文章链接',
+  description varchar(200) not null comment '描述',
+  mid varchar(10) not null comment '消息id',
+  title varchar(200) not null comment '标题'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '图文消息表';
+
+insert into article (picurl,url,description,mid,title) values('1','2','3','4','5');
+select * from article where mid=?;
+
+
+//创建图文消息对应表
+DROP TABLE IF EXISTS ArticleMap;
+create table ArticleMap(
+  id int not null AUTO_INCREMENT primary key comment '主键标识',
+  mid varchar(10) not null comment '消息id',
+  context varchar(200) not null comment '用户关键字'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '图文消息对应表';
+select * from ArticleMap where context like '%sss%' 
+insert into ArticleMap (mid,context) values ('1','2');
+
+
+//初始化数据库数据
+insert into knowledge values(1,'我开心，好舒服，好爽，心里开了花','',1);
+insert into knowledge values(2,'哈哈，嘻嘻，呵呵','',1);
+insert into knowledge values(3,'你知道的真多，好聪明呢','',1);
+
+insert into knowledge values(4,'给我讲个笑话','',2);
+insert into knowledge values(5,'继续','我们聊到哪里了？',3);
+insert into knowledge values(6,'再来一个','那你再给我点掌声吧！',3);
+insert into knowledge values(7,'还有吗？','你是指什么呢？',3);
+
+insert into knowledge values(8,'hi,hello,你好,嗨','你好，很高兴认识你',1);
+insert into knowledge values(9,'你的主人/老板/发明者是谁','我的幕后是刘西游，是个人类',1);
+insert into knowledge values(10,'你觉得我帅吗','还行吧，比我差一点',1);
+insert into knowledge values(11,'你在干什么呢','我在写代码，打dota',1);
+insert into knowledge values(12,'你喜欢我吗','我喜欢mm，漂亮的，丰乳肥臀',1);
+
+insert into knowledge values(13,'中国的首都是','中国首都是北京',1);
+insert into knowledge values(14,'明天要上班了','每周总有那么5天不想做事呢',1);
+insert into knowledge values(15,'我好饿','赶快上武商网买吃的啊！',1);
+insert into knowledge values(16,'什么事幸福','幸福就是性福',1);
+insert into knowledge values(17,'你是机器人吗','我是终结者',1);
+insert into knowledge values(18,'唉,哎,啊，是','你又咋了撒?',1);
+
+//问答知识表
+insert into knowledge_sub (pid,answer) values(1,'看到你我就开心了');
+insert into knowledge_sub (pid,answer) values(1,'有什么开心的说来听听');
+insert into knowledge_sub (pid,answer) values(1,'那你陪着我聊聊天吧');
+insert into knowledge_sub (pid,answer) values(1,'别难受了,我会生气的');
+
+insert into knowledge_sub (pid,answer) values(2,'看来你今天心情不错啊');
+insert into knowledge_sub (pid,answer) values(2,'嘿嘿');
+insert into knowledge_sub (pid,answer) values(2,'哈哈');
+insert into knowledge_sub (pid,answer) values(2,'嘻嘻');
+insert into knowledge_sub (pid,answer) values(2,'什么事这么好笑');
+
+insert into knowledge_sub (pid,answer) values(3,'什么事情这么好笑');
+insert into knowledge_sub (pid,answer) values(3,'我认为你说的有道理');
+insert into knowledge_sub (pid,answer) values(3,'因为我是聪明人');
+insert into knowledge_sub (pid,answer) values(3,'哥哥我天生就是好，出来祥云万丈，飘香千里');
+insert into knowledge_sub (pid,answer) values(3,'我不光天生就好，后天更努力');
+
+//笑话初始数据
+insert into joke (joke_content) values('一天一群醉汉酒后打车回家，伸手拦一辆110巡逻车，大叫"就算你是每公里一块一，也没必要写那么大嘛！"');
+insert into joke (joke_content) values('昨天被公司美女同事莫名亲了一口，心里各种的爽，后来才知道人家玩真心话大冒险，叫亲一个公司最丑的！最最丑的！');
+
+
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	
+	 -->
+
+    		
+<!-- <bean id="springDSN" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+<property name="testConnectionOnCheckin" value="true"></property>
+<property name="testConnectionOnCheckout" value="true"></property>
+<property name="idleConnectionTestPeriod" value="18000"></property>
+<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+<property name="maxPoolSize" value="20"></property>
+<property name="minPoolSize" value="5"></property>
+<property name="checkoutTimeout" value="18000"></property>
+<property name="maxStatements" value="50"></property>
+<property name="acquireIncrement" value="10" />   -->
+
+
+
+
+
+<!--  <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/lzr"></property>
+<property name="user" value="root"></property>
+<property name="password" value="123456"></property>   -->
+
+ <!-- <property name="jdbcUrl" value="jdbc:mysql://10.0.16.16:4066/71048194m_mysql_nkhqis5n"></property>
+<property name="user" value="R3O1qUwo"></property>
+<property name="password" value="v4u3E41AnbXF"></property> 
+</bean> -->
+
+<!-- <bean id="jdbcTemplate"
+        class="org.springframework.jdbc.core.JdbcTemplate" abstract="false" lazy-init="false" autowire="default" >
+        <property name="dataSource">
+            <ref bean="springDSN" />
+        </property>
+    </bean>
+    <bean id="messagedao" class="org.zr.model.dao.MessageDaoImpl">
+       <property name="jd">
+          <ref bean="jdbcTemplate" />
+       </property>
+    </bean>
+    <bean id="commentDao" class="com.model.dao.CommentDaoimpl">
+   <property name="jd">
+          <ref bean="jdbcTemplate" />
+       </property>
+    </bean> -->
+    	
+   
+<!-- </beans> -->
+
