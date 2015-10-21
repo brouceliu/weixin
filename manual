@@ -1,0 +1,8 @@
+ 搭建开发环境，做好前期客制化准备  验证微信
+ 
+ 1 做了一个coreservlet 用于验证微信请求的接受，已经请求通过  url http://lzrsgdtc.jd-app.com/coreServlet
+ token lzrstc
+ eckey  qCEtzGzGMO8Cj03iyzC9MiHU7LXNm7PYQf83ThLiS4n
+ 启用了信息加密
+ 
+ 

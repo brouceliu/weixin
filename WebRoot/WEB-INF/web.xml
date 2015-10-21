@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+    <servlet>
+		<servlet-name>startServlet</servlet-name>
+		<servlet-class>
+			org.zr.servlet.StrartServlet
+		</servlet-class>
+		
+		<load-on-startup>0</load-on-startup> 
+	</servlet> 
+  
+  
+ <!--  <filter>
+  <filter-name>browserFilter</filter-name>
+  <filter-class>org.zr.filter.BrowserFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  <filter-name>browserFilter</filter-name>
+  <url-pattern>*.jsp</url-pattern>
+  </filter-mapping> -->
+  
+   <error-page>
+ <error-code>404</error-code>
+ <location>/err.html</location>
+ </error-page>
+  <error-page>
+ <error-code>500</error-code>
+ <location>/err1.html</location>
+ </error-page>
+ 
+  <servlet>
+    <servlet-name>coreServlet</servlet-name>
+    <servlet-class>
+			org.zr.servlet.CoreServlet
+		</servlet-class>
+			<load-on-startup>0</load-on-startup> 
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>coreServlet</servlet-name>
+    <url-pattern>/coreServlet</url-pattern>
+  </servlet-mapping>
+  
+
+  <servlet>
+    <servlet-name>doExcelServlet</servlet-name>
+    <servlet-class>
+			org.zr.servlet.CheckOutServlet
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>doExcelServlet</servlet-name>
+    <url-pattern>/doExcelServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>linkUser</servlet-name>
+    <servlet-class>
+			org.zr.servlet.UserLinkServlet
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>linkUser</servlet-name>
+    <url-pattern>/LoginCheck</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>login</servlet-name>
+    <servlet-class>
+			org.zr.servlet.ProtectServlet
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>login</servlet-name>
+    <url-pattern>/LoginWinxin</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>createCard</servlet-name>
+    <servlet-class>
+			org.zr.servlet.CardServlet
+		</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createCard</servlet-name>
+    <url-pattern>/CreateCard</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>UploadHandleServlet</servlet-name>
+    <servlet-class>org.zr.servlet.UploadHandleServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>UploadHandleServlet</servlet-name>
+    <url-pattern>/servlet/UploadHandleServlet</url-pattern>
+</servlet-mapping>
+  
+  
+   <servlet>
+    <servlet-name>DestroyCard</servlet-name>
+    <servlet-class>org.zr.servlet.DestroyCodeServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>DestroyCard</servlet-name>
+    <url-pattern>/destroyCard</url-pattern>
+</servlet-mapping>
+  
+    <servlet>
+    <servlet-name>UpdateCard</servlet-name>
+    <servlet-class>org.zr.servlet.UpdateCardServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>UpdateCard</servlet-name>
+    <url-pattern>/updateCard</url-pattern>
+</servlet-mapping>
+  
+   <servlet>
+    <servlet-name>ChangeStatus</servlet-name>
+    <servlet-class>org.zr.servlet.ChangeStatusServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ChangeStatus</servlet-name>
+    <url-pattern>/change</url-pattern>
+</servlet-mapping>
+  
+   
+  <servlet>
+    <servlet-name>UploadCusom</servlet-name>
+    <servlet-class>org.zr.servlet.UploadCustomServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>UploadCusom</servlet-name>
+    <url-pattern>/servlet/UploadCustom</url-pattern>
+</servlet-mapping>
+  
+  
+   <servlet>
+    <servlet-name>LoginSite</servlet-name>
+    <servlet-class>org.zr.servlet.LoginServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>LoginSite</servlet-name>
+    <url-pattern>/servlet/loginsite</url-pattern>
+</servlet-mapping>
+  
+  <servlet>
+    <servlet-name>wb</servlet-name>
+    <servlet-class>org.zr.servlet.WeatherServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>wb</servlet-name>
+    <url-pattern>/servlet/weather</url-pattern>
+</servlet-mapping>
+  
+   <servlet>
+    <servlet-name>picMeg</servlet-name>
+    <servlet-class>org.zr.servlet.PicMegServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>picMeg</servlet-name>
+    <url-pattern>/servlet/PicMeg</url-pattern>
+</servlet-mapping>
+  
+   <servlet>
+    <servlet-name>picMap</servlet-name>
+    <servlet-class>org.zr.servlet.MegMapServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>picMap</servlet-name>
+    <url-pattern>/servlet/PicMap</url-pattern>
+</servlet-mapping>
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>

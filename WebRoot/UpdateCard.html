@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UpdateCard</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/wushang.js"></script>
+    <style type="text/css">
+    .up{
+    top:100px;
+    text-align: left;
+position:absolute;
+right:450px;
+width:450px;
+
+       }
+       body {
+	background-color:#b0e0e6;
+}
+    </style>
+
+  </head>
+  
+  <body>
+  <table class="up">
+  <tr>
+    <th>填写卡劵的id</th>
+    
+    <th><input type="text" id="type" ></th>
+  </tr>
+  <tr>
+  
+    <th>填写要修改的说明</th>
+   <th> <input type="text" id="manual" ></th>
+   
+  </tr>
+  <tr>
+    <th>填写要修改的描述</th>
+<th><input type="text" id="desc" ></th>
+  </tr>
+
+  <tr>
+  <th></th>
+      <th><input type="button" value="提交" onclick="updatecard()"> </th>
+  </tr>
+</table>
+
+  
+     
+  </body>
+</html>
